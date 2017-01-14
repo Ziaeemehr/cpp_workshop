@@ -1,0 +1,3 @@
+http://stackoverflow.com/questions/8812466/using-c-boosts-graph-library 
+http://www.technical-recipes.com/2015/getting-started-with-the-boost-graph-library/
+
