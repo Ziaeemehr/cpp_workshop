@@ -68,15 +68,15 @@ int main(int /* argc */ , char** /* argv */ )
 
 
 /*-------------------------------------------*/
-struct ode
-{
-    double param;
-    ode( double param ) : m_param( param ) {}
-
-    void operator()( state_type const& x , state_type& dxdt , time_type t ) const 
-    {
-        // your ode
-    }
-};
-
-integrate_const( stepper {} , ode { 0.1 } , x , t_start , t_end , dt , observer );
+// struct ode
+// {
+//     double param;
+//     ode( double param ) : m_param( param ) {}
+// 
+//     void operator()( state_type const& x , state_type& dxdt , time_type t ) const 
+//     {
+//         // your ode
+//     }
+// };
+// 
+// integrate_const( stepper {} , ode { 0.1 } , x , t_start , t_end , dt , observer );

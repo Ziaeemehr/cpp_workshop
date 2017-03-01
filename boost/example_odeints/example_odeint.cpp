@@ -28,6 +28,8 @@ int main(int argc, char **argv)
 {
     state_type x = { 10.0 , 1.0 , 1.0 }; // initial conditions
     integrate( lorenz , x , 0.0 , 25.0 , 0.1 , write_lorenz );
+    //if i want only the final values of x
+    cout << x[0]<<"\t"<<x[1]<<"\t"<<x[2]<<endl;
 }
 
 /*-----------------------------------------------------------------*/

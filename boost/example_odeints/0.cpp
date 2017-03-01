@@ -51,9 +51,6 @@ public:
 //]
 
 
-
-
-
 //[ integrate_observer
 struct push_back_state_and_time
 {
