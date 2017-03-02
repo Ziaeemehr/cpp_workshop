@@ -10,8 +10,8 @@ int main(int argc, char** argv) {
       exit(EXIT_FAILURE);
    }
    std::vector<double> X(5), Y(5);
-   X[0]=0.1;
-   X[1]=0.4;
+   X[0]=-0.1;
+   X[1]=-0.4;
    X[2]=1.2;
    X[3]=1.8;
    X[4]=2.0;
