@@ -8,7 +8,11 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
+                "databaseFilename": "",
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include"
+                ]
             }
         },
         {
@@ -20,7 +24,12 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
+                "databaseFilename": "",
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "/home/abolfazl/git/cpp_workshop/stroustrup_ppp/lib_files/"
+                ]
             }
         },
         {
@@ -30,7 +39,10 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
+                "databaseFilename": "",
+                "path": [
+                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
+                ]
             }
         }
     ]
