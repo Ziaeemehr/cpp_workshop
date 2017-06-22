@@ -1,0 +1,8 @@
+{
+    "python.linting.pylintEnabled": false,
+    "files.associations": {
+        "*.ipp": "cpp",
+        "functional": "cpp",
+        "fstream": "cpp"
+    }
+}
