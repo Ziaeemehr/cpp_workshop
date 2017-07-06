@@ -3,3 +3,6 @@
 a.out
 *.txt
 back/
+*.o
+*.out
+
