@@ -13,7 +13,8 @@
                     "/usr/include",
                     "/usr/local/include"
                 ]
-            }
+            },
+            "intelliSenseMode": "clang-x64"
         },
         {
             "name": "Linux",
@@ -30,7 +31,8 @@
                     "/usr/local/include",
                     "/home/abolfazl/git/cpp_workshop/stroustrup_ppp/lib_files/"
                 ]
-            }
+            },
+            "intelliSenseMode": "clang-x64"
         },
         {
             "name": "Win32",
@@ -43,7 +45,8 @@
                 "path": [
                     "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
                 ]
-            }
+            },
+            "intelliSenseMode": "msvc-x64"
         }
     ]
 }

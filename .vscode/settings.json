@@ -3,6 +3,7 @@
     "files.associations": {
         "*.ipp": "cpp",
         "functional": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "iosfwd": "cpp"
     }
 }
