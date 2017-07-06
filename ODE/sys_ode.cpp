@@ -33,7 +33,7 @@ int main()
 {
     int N{300};
     double ka{2.0};
-    double tfinal{200};
+    double tfinal{20};
     double dt{0.1};
     dim1 IC(N);
     int nstep = (int) tfinal/dt;
@@ -61,6 +61,7 @@ int main()
     ofile = fopen(filename1, "w");
     
     for (int i=0; i<nstep; i++){
+        fprintf(ofile,"%15.6f",times[i]);
         for (int j=0; j<N; j++){
             fprintf(ofile,"%15.6f",x_vec[j][i]);
         }
