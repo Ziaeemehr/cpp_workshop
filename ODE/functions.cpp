@@ -136,3 +136,19 @@ void SaveTofile(const std::string s, const dim1& times, const dim2& x_vec )
     }
     fclose(ofile);
 }
+//------------------------------------------------------------//
+//------------------------------------------------------------//
+template <class T>
+void transpose( std::vector< std::vector<T> > a,
+std::vector< std::vector<T> > b,
+int width, int height)
+{
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            b[j][i] = a[i][j];
+        }
+    }
+} 
+
