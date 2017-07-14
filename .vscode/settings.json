@@ -4,6 +4,7 @@
         "*.ipp": "cpp",
         "functional": "cpp",
         "fstream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "valarray": "cpp"
     }
 }
