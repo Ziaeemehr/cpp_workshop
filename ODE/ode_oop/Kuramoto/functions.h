@@ -8,7 +8,7 @@
 #include <vector>
 #include <omp.h>
 #include <iostream>
-
+#include "config.h"
 
 
 using StateVec   = std::valarray<double>;
@@ -19,8 +19,10 @@ using Integrator = void (*) (StateVec &, DerivFunc, double);
 
 void euler_integrator (StateVec &, DerivFunc, double);
 void runge_kutta4_integrator (StateVec &, DerivFunc, double);
-
 void integrate (Integrator, DerivFunc, OutputFunc, 
                 std::ofstream &, StateVec, int, double);
+void print_coordinates (double time, const StateVec &y, 
+                        std::ofstream &output);
+StateVec Kuramoto (const StateVec &x);
 
 #endif
