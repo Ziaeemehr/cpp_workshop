@@ -5,15 +5,15 @@ CXXFLAGS = -std=c++11  -O2 -lm -fopenmp
 objdir=obj
 srcs=functions.cpp main.cpp 
 objects = functions.o main.o
-dependencies = functions.h  
+
 
 prog: main.o functions.o 
 	$(CXX)  -o $@  $^ $(CXXFLAGS)
 
-main.o : main.cpp functions.h
+main.o : main.cpp functions.h config.h
 	$(CXX) -c main.cpp  $(CXXFLAGS)
 
-functions.o: functions.cpp functions.h 
+functions.o: functions.cpp functions.h config.h
 	$(CXX) -c functions.cpp $(CXXFLAGS)
 
 clean:

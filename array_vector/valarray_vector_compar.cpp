@@ -16,8 +16,27 @@ double get_cpu_time();
 int main()
 {
     const int N = 10000000;    // adjust as needed
-    
-    clock_t start,finish;
+    int iter = 1000;
+
+    {
+        valarray<double> a(1.0,N);
+        valarray<double> b(2.0,N);
+        valarray<double> c(N);
+
+        double wtime  = get_wall_time();        
+                
+        for (int i=0; i<iter; i++)
+            c = 2.0*a + 5.5*b; // using a for loop is similar performance to vector
+        
+
+        double sum = c.sum();
+
+        wtime = get_wall_time() - wtime;
+        
+        cout << "valarray" <<endl;
+        display_timing(wtime, 0);
+        cout << "check : sum = " << sum << endl;
+    }
 
     {
         valarray<double> a(1.0,N);
@@ -25,19 +44,23 @@ int main()
         valarray<double> c(N);
 
         double wtime  = get_wall_time();
-        
                 
-        for (int i=0; i<100; i++)
-            c = 2.0*a + 5.5*b; // using a for loop is similar performance to vector
+        for (int i=0; i<iter; i++){
+            for (int i=0; i<N; ++i)
+                c[i] = 2.0*a[i] + 5.5*b[i];
+        }
         
 
         double sum = c.sum();
 
         wtime = get_wall_time() - wtime;
+        
+        cout << "valarray loop" <<endl;
         display_timing(wtime, 0);
         cout << "check : sum = " << sum << endl;
     }
-
+    
+    
     {
         vector<double> a(N,1.0);
         vector<double> b(N,2.0);
@@ -45,7 +68,7 @@ int main()
 
         double wtime  = get_wall_time();
 
-        for (int k=0; k<100; k++) {
+        for (int k=0; k<iter; k++) {
             for (int i=0; i<N; ++i)
                 c[i] = 2.0*a[i] + 5.5*b[i];
         }
@@ -53,6 +76,8 @@ int main()
         double sum = accumulate(c.begin(),c.end(),0.0);
 
         wtime = get_wall_time() - wtime;
+        
+        cout << "vector" <<endl;
         display_timing(wtime, 0);
         cout << "check : sum = " << sum << endl;
     }

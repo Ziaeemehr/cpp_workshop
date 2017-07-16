@@ -1,6 +1,5 @@
 #include "functions.h"
 
-
 /*------------------------------------------------------------*/
 StateVec Kuramoto (const StateVec &x) 
 {
@@ -41,6 +40,7 @@ void runge_kutta4_integrator (StateVec &y, DerivFunc dydt, double dt) {
   auto k4 = dydt (y + dt*k3);
   y += (k1 + 2.*k2 + 2.*k3 + k4) * dt/6;
 }
+
 /*------------------------------------------------------------*/
 void integrate (Integrator integrator, DerivFunc dydt, OutputFunc output_func, 
                 std::ofstream &output, StateVec y, int num_steps, double dt) {
@@ -48,5 +48,34 @@ void integrate (Integrator integrator, DerivFunc dydt, OutputFunc output_func,
     output_func (step*dt, y, output);
     integrator (y, dydt, dt);
   }
+}
+/*------------------------------------------------------------*/
+double get_wall_time(){
+    struct timeval time;
+    if (gettimeofday(&time,NULL)){
+        //  Handle error
+        return 0;
+    }
+    return (double)time.tv_sec + (double)time.tv_usec * .000001;
+}
+/*------------------------------------------------------------*/
+double get_cpu_time(){
+    return (double)clock() / CLOCKS_PER_SEC;
+}
+/*------------------------------------------------------------*/
+void display_timing(double wtime, double cptime)
+{
+    using namespace std;
+    int wh,ch;
+    int wmin,cpmin;
+    double wsec,csec;
+    wh = (int) wtime/3600;
+    ch = (int) cptime/3600;
+    wmin = ((int)wtime % 3600)/60;
+    cpmin = ((int)cptime % 3600)/60;
+    wsec = wtime-(3600.*wh+60.*wmin);
+    csec = cptime-(3600.*ch+60.*cpmin);
+    printf ("Wall Time : %d hours and %d minutes and %.4f seconds.\n",wh,wmin,wsec);
+    printf ("CPU  Time : %d hours and %d minutes and %.4f seconds.\n",ch,cpmin,csec);
 }
 /*------------------------------------------------------------*/

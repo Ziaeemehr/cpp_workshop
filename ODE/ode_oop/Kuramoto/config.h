@@ -2,11 +2,11 @@
 #define CONFIG_H
 
 constexpr double    dt = 1.e-2;
-constexpr int     PARN = 50;
+constexpr int     PARN = 500;
 constexpr double PARka = 2.0;
 constexpr double PARka_over_N = PARka/(double)PARN;
 constexpr double PARw = M_PI;
-constexpr auto num_steps = 4000;
+constexpr auto num_steps = 1000;
 
 
 #endif
