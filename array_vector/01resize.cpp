@@ -39,10 +39,10 @@ int main ()
     for (int i = 0; i < n; ++i)
         M[i].resize(m);
     cout << "resized 2d vector:" << '\n';
-    cout << M.size() << '\t' << M[0].size()<<'\n';
+    cout << M.size() << ' ' << M[0].size()<<'\n';
     
-    for (int i=0; i<n; i++){
-      for(int j=0; j<m; j++){
+    for (int i=0; i<M.size(); i++){
+      for(int j=0; j<M[0].size(); j++){
           cout << M[i][j]<<" ";
       }
       cout<< "\n";
