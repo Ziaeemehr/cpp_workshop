@@ -4,20 +4,7 @@
 #define M_PI 3.14159265358979323846
 
 /*------------------------------------------------------------*/
-StateVec ODE::half(const StateVec& v) {
-      StateVec w(v);
-      for (unsigned int i=0; i<w.size(); i++)
-          w[i] /= 2.0;
-      return w;
-  }
-/*------------------------------------------------------------*/
-void ODE::print_IC()
-{
-  std::cout << IC[0]<<" "<<IC[1]<<"\n";
-  std::cout << dt << " " << N << "\n";
-}
-/*------------------------------------------------------------*/
-std::vector<StateVec > ODE::integrate (int num_steps) 
+std::vector<StateVec > ODE::integrate () 
 {   
     std::vector<StateVec > Coordinates(num_steps,StateVec(N+1));
     StateVec y = IC;
@@ -28,7 +15,8 @@ std::vector<StateVec > ODE::integrate (int num_steps)
         for (int j=1; j<N+1; j++)
             Coordinates[step][j] = y[j-1];
 
-        euler_integrator(y);
+        // euler_integrator(y);
+        runge_kutta4_integrator(y);
     }
     return Coordinates;
 }
@@ -36,12 +24,36 @@ std::vector<StateVec > ODE::integrate (int num_steps)
 void ODE::euler_integrator (StateVec &y )
 {
     StateVec f(N);
-    f = oscillator(y);
+    f = dydt(y);
     for (int i=0; i<y.size(); i++)
         y[i] += f[i] * dt;
 }
 /*------------------------------------------------------------*/
-StateVec ODE::oscillator(const StateVec &x)
+void ODE::runge_kutta4_integrator (StateVec &y) 
+{
+    int n = y.size();
+    StateVec k1(n), k2(n), k3(n), k4(n);
+    StateVec f(n);
+
+    k1 = dydt(y);
+
+    for (int i=0; i<n; i++)
+        f[i]= y[i]+ 0.5 * dt * k1[i];
+    k2 = dydt (f);
+
+    for (int i=0; i<n; i++)
+        f[i]= y[i]+ 0.5 * dt * k2[i];
+    k3 = dydt(f);
+
+    for (int i=0; i<n; i++)
+        f[i]= y[i]+ dt * k3[i];
+    k4 = dydt(f);
+
+    for (int i=0; i<n; i++)
+        y[i] += (k1[i] + 2.0*(k2[i] + k3[i]) + k4[i]) * dt/6.0;
+}
+/*------------------------------------------------------------*/
+StateVec ODE::dydt(const StateVec &x)
 {
     double sumx = 0.0;
     int n = N;

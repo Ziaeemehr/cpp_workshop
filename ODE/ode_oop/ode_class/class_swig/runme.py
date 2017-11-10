@@ -9,11 +9,9 @@ import numpy as np
 
 # ----- Object creation -----
 
-c = example.ODE(2,0.01,10,[np.pi-.01,0])
+c = example.ODE(2, 40, 0.01, [np.pi-.01,0])
 
-
-
-sol = c.integrate(4000)
+sol = c.integrate()
 
 sol = np.array(sol)
 pl.plot(sol[:,0], np.sin(sol[:,1]))
