@@ -4,19 +4,21 @@
 #define M_PI 3.14159265358979323846
 
 /*------------------------------------------------------------*/
-std::vector<StateVec > ODE::integrate () 
+std::vector<StateVec > ODE::integrate (std::string method) 
 {   
     std::vector<StateVec > Coordinates(num_steps,StateVec(N+1));
     StateVec y = IC;
-
+    std::cout<<method<<"\n";
+    
     for (int step = 0; step < num_steps; ++step) 
     {
         Coordinates[step][0] = step*dt;
         for (int j=1; j<N+1; j++)
             Coordinates[step][j] = y[j-1];
-
-        // euler_integrator(y);
-        runge_kutta4_integrator(y);
+        if (method=="euler")
+            euler_integrator(y);
+        else
+            runge_kutta4_integrator(y);
     }
     return Coordinates;
 }

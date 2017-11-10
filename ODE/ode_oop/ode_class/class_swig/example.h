@@ -21,7 +21,7 @@ public:
 
   void euler_integrator(StateVec & );
   void runge_kutta4_integrator(StateVec &);
-  std::vector<StateVec> integrate ();
+  std::vector<StateVec> integrate (std::string);
   StateVec dydt(const StateVec &x);
   StateVec IC;
 };
