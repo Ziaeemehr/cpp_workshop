@@ -6,5 +6,6 @@
         "fstream": "cpp",
         "iosfwd": "cpp",
         "valarray": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
