@@ -10,4 +10,5 @@ prog
 *.so
 *.pyc
 *_wrap.cpp
-
+pdf/
+build/

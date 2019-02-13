@@ -63,7 +63,7 @@ int main(int /* argc */ , char** /* argv */ )
 //     size_t steps = integrate_adaptive( controlled_stepper , harmonic_oscillator , 
 //                         x , 0.0 , 10.0 , 0.01,
 //                         push_back_state_and_time( x_vec , times ) );
-
+    cout << "steps: " << steps << endl;
     /* output */
     for( size_t i=0; i<=steps; i++ )
     {

@@ -1,0 +1,123 @@
+#Thalamic model
+
+param g_LK=0.0
+param g_h=0.025
+
+#Time constants for excitatory and inhibitory neurons in ms
+!tau=20
+
+#Conductances 
+!g_L=1
+
+!g_T_t=3
+!g_T_r=2.3
+
+!g_AMPA=1
+!g_GABA=1
+
+#Reversal potential of excitatory and inhibitory synapses in mV
+!E_AMPA=0
+!E_GABA=-70
+
+# Reversal potential of other currents
+!E_L=-70
+!E_K=-100 
+!E_Ca=120
+!E_h=-40
+
+#Maximum firing rate in ms^-1
+!Q_max=400E-3
+
+#Sigmoid threshold in mV
+!theta=-58.5
+
+#Slope for sigmoid in mV
+!sigma=6
+
+#Scaling parameter for sigmoidal mapping(dimensionless)
+!C=(pi/sqrt(3))
+
+#PSC rise time in ms^-1
+!gamma_t=70E-3
+!gamma_r=100E-3
+
+#Connectivities
+!N_tr=3
+!N_rt=5
+!N_rr=25
+
+#Calcium dynamic
+!alpha_Ca=-51.8E-6
+!tau_Ca=10
+!Ca_0=2.4E-4
+
+#Parameters of h-current
+!k1= 2.5E7
+!k2= 4E-4
+!k3= 1E-1
+!k4= 1E-3
+!n_P= 4
+!g_inc= 2
+
+#Functions
+#Firing rates
+Qt(Vt)=Q_max/(1+exp(-C*(Vt-theta)/sigma))
+Qr(Vr)=Q_max/(1+exp(-C*(Vr-theta)/sigma))
+
+#Activation functions
+m_inf_T_t(Vt)=1/(1+exp(-(Vt+59)/6.2))
+m_inf_T_r(Vr)=1/(1+exp(-(Vr+52)/7.4))
+h_inf_T_t(Vt)=1/(1+exp((Vt+81)/4))
+h_inf_T_r(Vr)=1/(1+exp((Vr+80)/5))
+
+tau_h_T_t(Vt)=(30.8+(211.4+exp((Vt+115.2)/5))/(1+exp((Vt+86)/3.2)))/3.7371928
+tau_h_T_r(Vr)=(85+1/(exp((Vr+48)/4)+exp(-(Vr+407)/50)))/3.7371928
+
+m_inf_h(Vt)=1/(1+exp((Vt+75)/5.5))
+tau_m_h(Vt)=(20+1000/(exp((Vt+71.5)/14.2)+exp(-(Vt+89)/11.6)))
+
+#Synaptic currents
+I_tr(Vr,s_er)=s_er*(Vr-E_AMPA)
+I_rt(Vt,s_rt)=s_rt*(Vt-E_GABA)
+I_rr(Vr,s_rr)=s_rr*(Vr-E_GABA)
+
+#Leak currents
+I_L_t(Vt)=g_L*(Vt-E_L)
+I_L_r(Vr)=g_L*(Vr-E_L)
+I_LK_t(Vt)=g_LK*(Vt-E_K)
+I_LK_r(Vr)=g_LK*(Vr-E_K)
+
+#Calicum current
+I_T_t(Vt,h_T_t)=g_T_t*m_inf_T_t(Vt)*m_inf_T_t(Vt)*h_T_t*(Vt-E_Ca)
+I_T_r(Vr,h_T_r)=g_T_r*m_inf_T_r(Vr)*m_inf_T_r(Vr)*h_T_r*(Vr-E_Ca)
+
+#h-current
+I_h(Vt,m_h,m_h2)=g_h*(m_h+g_inc*m_h2)*(Vt-E_h)
+
+# Protein binding
+P_h(Ca)=(k1*Ca*Ca*Ca*Ca/(k1*Ca*Ca*Ca*Ca+k2))
+
+#System equation
+Vt'=-(I_L_t(Vt)+I_rt(Vt,s_rt))/tau-(I_LK_t(Vt)+I_T_t(Vt,h_T_t)+I_h(Vt,m_h,m_h2))
+Vr'=-(I_L_r(Vr)+I_tr(Vr,s_er)+I_rr(Vr,s_rr))/tau-(I_LK_r(Vr)+I_T_r(Vr,h_T_r))
+Ca'=(alpha_Ca*I_T_t(Vt,h_T_t)-(Ca-Ca_0)/tau_Ca)
+h_T_t'=(h_inf_T_t(Vt)-h_T_t)/tau_h_T_t(Vt)
+h_T_r'=(h_inf_T_r(Vr)-h_T_r)/tau_h_T_r(Vr)
+m_h'=((m_inf_h(Vt)*(1-m_h2)-m_h)/tau_m_h(Vt)-k3*P_h(Ca)*m_h+k4*m_h2)
+m_h2'=(k3*P_h(Ca)*m_h-k4*m_h2)
+s_er'=x_er
+s_rt'=x_rt
+s_rr'=x_rr
+x_er'=gamma_t*gamma_t*(N_tr*Qt(Vt)-s_er)-2*gamma_t*x_er
+x_rt'=gamma_r*gamma_r*(N_rt*Qr(Vr)-s_rt)-2*gamma_r*x_rt
+x_rr'=gamma_r*gamma_r*(N_rr*Qr(Vr)-s_rr)-2*gamma_r*x_rr
+
+# define the initial states
+init Vt=-68,Vr=-68,Ca=2.4E-4
+
+# simulation settings
+@ maxstor=1000000,total=3000,dt=0.1,meth=rungekutta,njmp=10,bound=200
+@ YLO=-80,YHI=0,XLO=0,XHI=3000
+@ nmax=80000,npr=0,ntst=100,epsl=1e-9,epss=1e-7,epsu=1e-7,parmin=0,parmax=0.1,
+@ autoxmin=0,autoxmax=0.1,autoymin=-100,autoymax=0, ds=1e-3,dsmin=1e-5,dsmax=0.005
+done

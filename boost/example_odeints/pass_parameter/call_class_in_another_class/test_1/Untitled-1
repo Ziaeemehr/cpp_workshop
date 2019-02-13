@@ -1,0 +1,38 @@
+You could define the osc_solver class with a template parameter HarmType, which parameterizes the type of the member osc_solver::m_ho and construct it by forwarding the arguments of the constructor of osc_solver. Something like
+
+#include <utility>
+
+template <class HarmType>
+class osc_solver {
+public:
+     template <class... ArgsType>
+     osc_solver(ArgsType&&... parameters_ham) : m_ho(std::forward<ArgsType>(parameters_harm)...)) {
+        x = {1.0, 0.0}; // start at x=1.0, p=0.0
+
+    }
+    void run();
+
+    private:
+    HarmType m_ho;
+    state_type x;
+    vector<state_type> x_vec;
+    vector<double> times;
+};
+
+Then for example, you could use an object of osc_solver as
+
+// harm_osc needs 1 parameter in the constructor
+osc_solver<harm_osc> solver(0.15);
+// harm_osc_special needs 2 parameters in the constructor
+osc_solver<harm_osc_special> solver(0.15, 0.2);
+More generally, you could define osc_solver::osc_solver as to require both parameters used in class osc_solver and in constructing osc_solver:m_ho, like:
+
+template <class HarmType>
+class osc_solver {
+public:
+    template <class... ArgsType>
+    osc_solver(double a, ArgsType&&... parameters_ham) : m_ho(std::forward<ArgsType>(a, parameters_harm)...))
+    {
+       // Here use parameter a
+    }
+ // ...
