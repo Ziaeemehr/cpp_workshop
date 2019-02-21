@@ -7,11 +7,12 @@
 #include <cstdio>
 #include <string>
 #include <sys/stat.h>
+#include <iomanip>
 
 using namespace std;
 
 bool folderExists(const std::string& path);
-
+bool fileExists(const std::string &filename);
 int main()
 {
     
@@ -20,45 +21,47 @@ int main()
         auto info = system(("mkdir -p " + path).c_str());
 
     std::ofstream oX((path + "/X.bin").c_str(), std::ios::out | std::ios::binary);
-    std::ofstream oY((path + "/Y.bin").c_str(), std::ios::out | std::ios::binary);
-    std::ofstream oZ((path + "/Z.bin").c_str(), std::ios::out | std::ios::binary);
+    std::string ofname = "../data/bin/Y.txt";
 
-    if(!oX || !oY || !oZ ) {  
+    FILE *ofile;
+    ofile = fopen(ofname.c_str(), "w");
+    if (!fileExists(ofname)){
+        cout << "LET file did not open correctly \n!";
+        exit(EXIT_FAILURE);
+    }
+
+    if(!oX ) {  
 	    cout << "Could not open file for output!!";
 	    exit(EXIT_FAILURE);
 	}
 
 
-    int N = 10;
+    int N = 2000;
 
-    std::vector<double> x(N);
-    vector<vector<double>> y(N, vector<double>(3)); 
-    vector<vector<int>>    z(N, vector<int>(3)); 
-    // initialization
     
-    for (int i=0; i<N; i++) {
-        x[i] = i+0.0;
-    }
+    vector<vector<double>> x(N, vector<double>(N)); 
+    
+    // initialization
 
-    for (int i=0; i<N; i++) {
-        for (int j=0; j<3; j++) {
-            y[i][j] = i+j;
-            z[i][j] = i+j;
-        }
-    }
+    for (int i=0; i<N; i++) 
+        for (int j=0; j<N; j++) 
+            x[i][j] = (double)rand() / RAND_MAX;
 
     // writing to file
-    oX.write((char *)&x[0], x.size() * sizeof x[0]);
-    for (int i=0; i<N; i++) {
-        for (int j=0; j<3; j++) {
-            oY.write((char *)&y[i][j], sizeof(double));
-            oZ.write((char *)&z[i][j], sizeof(int));
-        }
-    
-    }
+    for (int i=0; i<N; i++)
+        for (int j=0; j<N; j++) 
+            oX.write((char *)&x[i][j], sizeof(double));
 
+
+    for (int i=0; i<N; i++) {
+        for (int j=0; j<N; j++) {
+            fprintf(ofile, "%18.15f", x[i][j]);
+        }
+        fprintf(ofile, "\n");
+    }
+            
     oX.close();
-    oY.close();
+    fclose(ofile);
     
     return 0;
 }
@@ -77,4 +80,15 @@ bool folderExists(const std::string& path)
     {
         return false;
     }
+}
+
+bool fileExists(const std::string &filename)
+{
+    /**return true if input file exists*/
+    struct stat buf;
+    if (stat(filename.c_str(), &buf) != -1)
+    {
+        return true;
+    }
+    return false;
 }
