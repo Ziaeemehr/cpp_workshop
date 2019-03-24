@@ -3,7 +3,7 @@
 # This file illustrates the proxy class C++ interface generated
 # by SWIG.
 
-import example
+import odesolver
 import pylab as pl 
 import numpy as np 
 from time  import time
@@ -14,9 +14,9 @@ from numpy import pi
 start = time()
 N = 20
 IC = np.random.uniform(-pi, pi, N).tolist()
-c = example.ODE(N, 400.0, 0.1, IC)
+c = odesolver.ODE(N, 400.0, 0.01, IC)
 
-sol = c.integrate("rk4")
+sol = c.integrate("euler")
 
 print "Done in ", time()-start," seconds"
 

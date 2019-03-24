@@ -1,6 +1,6 @@
 /* File : example.cxx */
 
-#include "example.h"
+#include "odesolver.h"
 #define M_PI 3.14159265358979323846
 
 /*------------------------------------------------------------*/

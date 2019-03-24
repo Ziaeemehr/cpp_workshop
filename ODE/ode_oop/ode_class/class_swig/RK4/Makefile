@@ -6,7 +6,7 @@ SWIGFLAGS = -c++ -python -shadow
 PYTHON_VERSION = 2.7
 PYTHON_INCLUDE = /usr/include/python$(PYTHON_VERSION)
 
-TARGET = example
+TARGET = odesolver
 OBJS= $(TARGET).o $(TARGET)_wrap.o
 
 _$(TARGET).so: $(OBJS)

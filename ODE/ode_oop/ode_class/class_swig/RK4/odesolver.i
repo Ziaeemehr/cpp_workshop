@@ -1,8 +1,8 @@
-/* File : example.i */
-%module example
+/* File : odesolver.i */
+%module odesolver
 
 %{
-#include "example.h"
+#include "odesolver.h"
 %}
 
 %include stl.i
@@ -13,4 +13,4 @@ namespace std {
     %template(DoubleVector2) vector<vector<double> >;
 }
 /* Let's just grab the original header file here */
-%include "example.h"
+%include "odesolver.h"
