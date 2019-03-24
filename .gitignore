@@ -12,3 +12,4 @@ prog
 *_wrap.cpp
 pdf/
 build/
+.vscode/
