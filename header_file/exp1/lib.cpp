@@ -1,4 +1,4 @@
-#include "foo.h"
+#include "lib.h"
 
 int Multiply(const int Number)
 {
