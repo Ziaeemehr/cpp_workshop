@@ -1,16 +1,6 @@
 /*
- * phase_chain.cpp
- *
- * Example of OMP parallelization with odeint
- *
- * Copyright 2013 Karsten Ahnert
- * Copyright 2013 Mario Mulansky
- * Copyright 2013 Pascal Germroth
- * Distributed under the Boost Software License, Version 1.0. (See
- * accompanying file LICENSE_1_0.txt or copy at
- * http://www.boost.org/LICENSE_1_0.txt)
  * To compile:
- * g++  odeint_openmp.cpp -fopenmp -lboost_system -lboost_timer
+ * g++  filename.cpp -fopenmp -lboost_system -lboost_timer
  */
 
 #include <iostream>
@@ -75,7 +65,7 @@ int main( int argc , char **argv )
     //]
 
     //[phase_chain_stepper
-    typedef runge_kutta4<
+    typedef runge_kutta_cash_karp54<
                       state_type , double ,
                       state_type , double ,
                       openmp_range_algebra
@@ -92,9 +82,9 @@ int main( int argc , char **argv )
     integrate_n_steps( stepper_type() , phase_chain( 1.2 ) ,
                        x , 0.0 , 0.01 , 100 );
     //]
-    // for (int i=0; i<5; i++)
-    //     printf("%18.9f ", x[i]);
-    // printf("\n");
+    for (int i=0; i<5; i++)
+        printf("%18.9f ", x[i]);
+    printf("\n");
 
     double run_time = static_cast<double>(timer.elapsed().wall) * 1.0e-9;
     std::cerr << run_time << " SECONDS" << std::endl;
