@@ -8,8 +8,6 @@ main.o: main.cpp lib.h
 	$(CXX) -c main.cpp $(CXXFLAGS)
 
 clean:
-	rm  prog 
-eradicate :
-	rm *.o prog 
+	rm  -f prog *.o
 
 .PHONY: clean
