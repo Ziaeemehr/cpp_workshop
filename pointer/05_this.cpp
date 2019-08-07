@@ -18,7 +18,7 @@ int c1::getvalue() const
 int c1::getvalue2() const 
 {
     printf("getvalue2 \n");
-    return this->getvalue();
+    return this->getvalue(); // this ass pointer to the current object
 }
 
 int main()

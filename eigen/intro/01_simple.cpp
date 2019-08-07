@@ -21,5 +21,9 @@ int main()
     int size=10;
     MatrixXd m1 = MatrixXd::Zero(size, size);
     cout << m1 << endl;
+    
+    MatrixXd m2;
+    m2 = m;
+    cout <<m2 << endl;
   
 }

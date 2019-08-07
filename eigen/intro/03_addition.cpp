@@ -3,6 +3,8 @@
 
 
 using namespace Eigen;
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -23,4 +25,7 @@ int main()
     Vector3d w(1, 0, 0);
     std::cout << "-v + w - v =\n"
               << -v + w - v << std::endl;
+              
+    a /= 2.0;
+    cout << a << "\n";
 }
