@@ -11,9 +11,9 @@
 
 using dim1 = std::vector<double>;
 using dim2 = std::vector<std::vector<double>>;
+using std::vector;
 using std::cout;
 using std::endl;
-using std::vector;
 
 namespace std
 {
