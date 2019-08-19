@@ -16,6 +16,12 @@ T sparseMax(SparseMatrix<T> &mat)
 {
     return Map<Matrix<T, Dynamic, 1>>(mat.valuePtr(), mat.nonZeros()).maxCoeff();
 }
+
+template <class T>
+T sparseMax_RM(SparseMatrix<T, RowMajor> &mat)
+{
+    return Map<Matrix<T, Dynamic, 1>>(mat.valuePtr(), mat.nonZeros()).maxCoeff();
+}
 // ------------------------------------------------------------//
 
 int maxCoeff(const SparseMatrix<int, RowMajor> &A)
@@ -48,7 +54,7 @@ int main()
     for (int i = 0; i < 4; i++)
         mat.insert(indexi[i], indexj[i]) = aij[i];
 
-    cout << mat << endl;
+    cout << 1*mat << endl;
 
     // method1
     cout << maxCoeff(mat) << endl;
@@ -56,13 +62,13 @@ int main()
     // method2
     if (!mat.isCompressed())
         mat.makeCompressed();
-    auto max = mat.coeffs().maxCoeff();
-    cout << max << endl;
+    auto max2 = mat.coeffs().maxCoeff();
+    cout << max2 << endl;
 
     // method3
     if (!mat.isCompressed())
         mat.makeCompressed();
-    auto max = sparseMax(mat);
-
+    auto max3 = sparseMax_RM(mat);
+    cout << max3 << endl;
     return 0;
 }
