@@ -10,7 +10,12 @@ int main()
 {
     vector<int> v = {3, 7, 1, 9, 3};
     int a = *std::max_element(v.begin(), v.end());
-    cout << a << endl;
-
+    int maxElementIndex = std::max_element(v.begin(),v.end()) - v.begin();
+    
+    cout << "max element " << a << " at " << maxElementIndex << endl;
+    
+    int b = *std::min_element(v.begin(), v.end());
+    int minElementIndex = std::min_element(v.begin(),v.end()) - v.begin();
+    cout << "min element " << b << " at " << minElementIndex << endl;
 
 }
