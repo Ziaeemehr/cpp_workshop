@@ -19,7 +19,7 @@ int main()
     cin >> (*ptr).inch;
 
     cout << "Displaying information." << endl;
-    cout << "Distance = " << (*ptr).feet << " feet " << (*ptr).inch << " inches";
+    cout << "Distance = " << (*ptr).feet << " feet and " << (*ptr).inch << " inches";
     cout << endl;
     
     return 0;
