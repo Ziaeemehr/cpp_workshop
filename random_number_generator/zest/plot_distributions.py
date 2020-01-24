@@ -7,4 +7,5 @@ r = np.loadtxt("r.txt")
 n = len(r)
 
 pl.hist(r, bins=int(np.sqrt(n)), color="k", density=True)
+pl.savefig("f.png")
 pl.show()
