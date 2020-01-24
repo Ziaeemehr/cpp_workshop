@@ -19,9 +19,9 @@ int main(int argc, char **argv)
     SparseVector<std::complex<float>> vec0(1000); // declares a column sparse vector of complex<float> of size 1000
     SparseVector<double, RowMajor> vec1(1000);    // declares a row sparse vector of double of size 1000
 
-    cout << mat1.rows() << endl;
-    cout << mat1.cols() << endl;
-    cout << mat1.nonZeros() << endl;
+    // cout << mat1.rows() << endl;
+    // cout << mat1.cols() << endl;
+    // cout << mat1.nonZeros() << endl;
 
     cout << "============================================================" << endl;
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     vector<int> aij{1, 5, 4, 6};
     vector<int> indexi{0, 2, 3, 1};
     vector<int> indexj{1, 0, 2, 1};
-    
+
     SparseMatrix<int, RowMajor> mat(rows, cols);
     mat.reserve(Eigen::RowVectorXi::Constant(rows, 3));
     // method 1
@@ -39,10 +39,9 @@ int main(int argc, char **argv)
         mat.insert(indexi[i], indexj[i]) = aij[i];
     }
 
-    cout << 1* mat << endl;
-
     // method 2
-    vector<T> tripletList;
+    vector<T>
+        tripletList;
     tripletList.reserve(4);
     for (size_t i = 0; i < 4; i++)
         tripletList.push_back(T(indexi[i], indexj[i], aij[i]));

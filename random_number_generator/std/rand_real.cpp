@@ -5,13 +5,14 @@
 #include<random>
 #include<vector>
 using namespace std;
-const int n =100;
+const int n =10;
 int main()
 {
     double r[n];
     for (int i=0; i<n; i++)
     {
         r[i] = ((double) rand() / (RAND_MAX));
-        cout << r[i]  << endl;
+        cout << r[i]  << " ";
     }
+    cout << endl;
 }

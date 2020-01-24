@@ -12,23 +12,24 @@ double add(const double a, const double b);
 double mult(const double a, const double b);
 /*------------------------------*/
 // function pointer as a parameter
-// double combiner(double a, double b, double(*func)(double, double))
-// {
-//     return func(a, b);
-// }
-/*------------------------------*/
-
-// function pointer as a parameter with a function pointer type
-double combiner(double a, double b, functiontype3 func)
+double combiner(double a, double b, double(*func)(double, double))
 {
     return func(a, b);
 }
+/*------------------------------*/
+
+// function pointer as a parameter with a function pointer type
+// double combiner(double a, double b, functiontype3 func)
+// {
+//     return func(a, b);
+// }
 
 /*------------------------------*/
 
 int main()
 {
-    functiontype2 func2 = &dosomethingwithchar;
+    // functiontype2 func2 = &dosomethingwithchar;
+    functiontype2 func2 = dosomethingwithchar;
     int result = func2('a');
 
     cout << combiner(1, 2, add) << endl;

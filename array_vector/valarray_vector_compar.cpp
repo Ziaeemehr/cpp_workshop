@@ -15,7 +15,7 @@ double get_cpu_time();
 
 int main()
 {
-    const int N = 10000000;    // adjust as needed
+    const int N = 100000;    // adjust as needed
     int iter = 1000;
 
     {

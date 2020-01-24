@@ -27,7 +27,7 @@ void acquire_signal(double *signal, double *theta, int fs) {
     }
 }
 
-void fine_frequencies(double *signal, 
+void find_frequencies(double *signal, 
                       std::vector<double>& freq, 
                       std::vector<double>& yf,
                       int fs)
@@ -59,7 +59,7 @@ int main() {
 
 
     acquire_signal(signal,theta, fs);
-    fine_frequencies(signal, freq, yf, fs);
+    find_frequencies(signal, freq, yf, fs);
 
     //save signal and result
     std::ofstream f1,f2;

@@ -12,6 +12,9 @@ int main()
     VectorXd v(3);
     v << 1, 2, 3;
     cout << "m * v = " << endl << m *v << endl;
+    
+    cout << (m.array() < 50) << endl;
+    
 
     Matrix3d m1 = Matrix3d::Random();
     m1 = (m1 + Matrix3d::Constant(1.2)) * 50;

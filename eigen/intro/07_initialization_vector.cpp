@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <vector>
+#include <valarray>
 
 using namespace Eigen;
 using namespace std;
@@ -28,6 +29,20 @@ int main()
     std::vector<double> a = {1, 2, 3, 4};
     Eigen::VectorXd b = Eigen::Map<Eigen::VectorXd, Eigen::Unaligned>(a.data(), a.size());
     cout << b << endl;
+    cout << b(0) << endl;
+    
+    Eigen::Vector3d a1(1.0, 2.0, 3.0);
+    Eigen::Vector3d a2(1.5, 2.5, 3.5);
+    
+    cout << a1+a2 << endl;
+       
+    vector<double> vec(a2.data(), a2.data() + a2.size());
+    valarray<double> val(vec.data(), vec.size());
+    
+    for (auto i : val)
+        cout << i << " ";
+    cout << endl;
+    
     
     
     

@@ -17,10 +17,9 @@ clean:
 	rm -rf  *.pyc ./../data/*.txt ./../data/*.png ./*.txt
 	rm -f *.png *.out *.pyc ../data/*.npy ../data/*.bin ../data/*.npz
 	rm -f ../data/*.pdf
-eradicate:
-	rm -rf *.o  *.pyc ./../data/*.txt  ./../data/*.png ./*.txt
-	rm -f *.png prog* *.out *.pyc ../data/*.npy ../data/*.bin
-	rm -f ../data/*.npz ../data/*.pdf
+eradicate: clean
+	rm -rf *.o  *.pyc 
+	rm -f *.png prog* 
 
 
 .PHONY: clean, eradicate

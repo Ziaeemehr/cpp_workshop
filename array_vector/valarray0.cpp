@@ -22,5 +22,16 @@ int main () {
    valarray<int> myarray (100,50);
    cout << myarray.size()<<endl;
    
+   valarray<int> v1(3), v2(3);
+   v1 ={1,2,3};
+   v2 ={2,4,5};
+   v1 += v2;
+   for (auto i:v1)
+       cout << i << endl;
+   
+   valarray<int> aaa = pow(v2, 2);
+   for (auto a:aaa)
+       cout << a << endl;
+   
    return 0;
 }
