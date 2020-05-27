@@ -23,6 +23,7 @@ int main(int argc, char **argv)
         mat.insert(indexi[i], indexj[i]) = aij[i];
 
     cout << 1*mat << endl;
+    
 
     // loop over nonzero elements (colom major)
     cout << "value, \t row, \t col, \t index" << endl;
