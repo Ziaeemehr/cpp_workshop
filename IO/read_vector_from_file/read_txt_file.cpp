@@ -16,11 +16,11 @@ int main()
         infile >> a[i];
     infile.close();
 
-    double sum1=0
-    for (int i=0; i<10; i++)
-        sum1 +=a[i];
-    cout <<sum1;
-    
+    double sum1 = 0;
+    for (int i = 0; i < 10; i++)
+        sum1 += a[i];
+    cout << sum1;
+
     for (int i=0; i<10; i++)
         cout<<a[i]<<"\n";
     

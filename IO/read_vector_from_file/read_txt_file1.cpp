@@ -32,7 +32,7 @@ std::vector<int> read_from_file(std::string filename)
 int main()
 {
     std::vector<int> numbers;
-    ifstream inputFile("c.txt");        // Input file stream object
+    ifstream inputFile("data/c.txt");        // Input file stream object
 
     // Check if exists and then open the file.
     if (inputFile.good()) {
@@ -57,7 +57,7 @@ int main()
         exit (EXIT_FAILURE);
     }
     
-    auto D = read_from_file("c.txt");
+    auto D = read_from_file("data/c.txt");
     for (auto d : D)
         cout << d << "\n";
 
