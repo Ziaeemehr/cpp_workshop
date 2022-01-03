@@ -30,7 +30,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    int N = 10;
+    int N = 5;
 
     std::vector<double> x(N);
     vector<vector<double>> y(N, vector<double>(3));
@@ -87,3 +87,4 @@ bool folderExists(const std::string &path)
         return false;
     }
 }
+
